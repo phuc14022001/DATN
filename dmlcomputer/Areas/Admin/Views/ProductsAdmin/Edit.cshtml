@@ -192,8 +192,8 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        @Html.DropDownListFor(model => model.type, new[] { new SelectListItem { Value = "1", Text = "Laptop" },
-                                                                              new SelectListItem { Value = "2", Text = "Phụ kiện" } }, new { @class = "form-select form-select-solid form-select-lg fw-bold" })
+                                        @Html.DropDownListFor(model => model.type, new[] { new SelectListItem { Value = "1", Text = "Bảo dưỡng sửa chữa" },
+                                                                              new SelectListItem { Value = "2", Text = "Làm đẹp xe" }, new SelectListItem { Value = "3", Text = "Bảo hiểm xe" } }, new { @class = "form-select form-select-solid form-select-lg fw-bold" })
                                         @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
                                     </div>
                                     <!--end::Col-->

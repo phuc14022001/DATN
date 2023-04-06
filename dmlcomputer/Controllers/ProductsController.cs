@@ -16,19 +16,19 @@ namespace DoAn_LapTrinhWeb.Controllers
     {
         private DbContext db = new DbContext();
         //Lấy danh sách laptop
-        public ActionResult Laptop(int? page,string sortOrder)
+        public ActionResult baoduong(int? page,string sortOrder)
         {
-            ViewBag.Type = "Laptop";
-            ViewBag.SortBy = "laptop" + "?";
+            ViewBag.Type = "Bảo dưỡng";
+            ViewBag.SortBy = "Bảo dưỡng" + "?";
             ViewBag.CountProduct = db.Products.Where(m => m.type == 1).Count();
-            return View("Product", GetProduct(m => m.status == "1" && m.type == ProductType.LAPTOP, page, sortOrder));
+            return View("Product", GetProduct(m => m.status == "1" && m.type == ProductType.Baoduong, page, sortOrder));
         }
-        public ActionResult PC(int? page, string sortOrder)
+        public ActionResult lamdep(int? page, string sortOrder)
         {
-            ViewBag.Type = "PC";
-            ViewBag.SortBy = "PC" + "?";
+            ViewBag.Type = "Làm đẹp xe";
+            ViewBag.SortBy = "Làm đẹp xe" + "?";
             ViewBag.CountProduct = db.Products.Where(m => m.type == 3).Count();
-            return View("Product", GetProduct(m => m.status == "1" && m.type == ProductType.PC, page, sortOrder));
+            return View("Product", GetProduct(m => m.status == "1" && m.type == ProductType.Lamdep, page, sortOrder));
         }
         //Lấy danh sách phụ kiện
         public ActionResult Accessories(int? page, string sortOrder)
@@ -38,40 +38,33 @@ namespace DoAn_LapTrinhWeb.Controllers
             ViewBag.CountProduct = db.Products.Where(m => m.type ==3).Count();
             return View("Product", GetProduct(m => m.status == "1" && m.type == ProductType.ACCESSORY, page, sortOrder));
         }
-        public ActionResult LAPTOPVANPHONG(int? page, string sortOrder)
+        public ActionResult gam(int? page, string sortOrder)
         {
-            ViewBag.SortBy = "LAPTOPVANPHONG";
-            ViewBag.Type = "Laptop Văn Phòng" + "?";
+            ViewBag.SortBy = "Bảo dương gầm xe";
+            ViewBag.Type = "Bảo dương gầm xe" + "?";
             ViewBag.CountProduct = db.Products.Where(m => m.genre_id == 1).Count();
-            return View("Product", GetProduct(m => m.status == "1" && m.genre_id == ProductGene.LAPTOPVANPHONG, page, sortOrder));
+            return View("Product", GetProduct(m => m.status == "1" && m.genre_id == ProductGene.gam, page, sortOrder));
         }
-        public ActionResult LAPTOPGAMING(int? page, string sortOrder)
+        public ActionResult maylanh(int? page, string sortOrder)
         {
-            ViewBag.SortBy = "LAPTOPGAMING";
-            ViewBag.Type = "Laptop Gaming" + "?";
-            ViewBag.CountProduct = db.Products.Where(m => m.genre_id == 11).Count();
-            return View("Product", GetProduct(m => m.status == "1" && m.genre_id == ProductGene.LAPTOPGAMING, page, sortOrder));
+            ViewBag.SortBy = "Bảo dưỡng máy lạnh";
+            ViewBag.Type = "Bảo dưỡng máy lạnh" + "?";
+            ViewBag.CountProduct = db.Products.Where(m => m.genre_id == 12).Count();
+            return View("Product", GetProduct(m => m.status == "1" && m.genre_id == ProductGene.maylanh, page, sortOrder));
         }
-        public ActionResult LAPTOPWORKSTATION(int? page, string sortOrder)
+        public ActionResult phukien(int? page, string sortOrder)
         {
-            ViewBag.SortBy = "LAPTOPWORKSTATION";
-            ViewBag.Type = "Laptop Workstation" + "?";
+            ViewBag.SortBy = "Phụ kiện";
+            ViewBag.Type = "Phụ kiện" + "?";
             ViewBag.CountProduct = db.Products.Where(m => m.genre_id == 15).Count();
-            return View("Product", GetProduct(m => m.status == "1" && m.genre_id == ProductGene.LAPTOPWORKSTATION, page, sortOrder));
+            return View("Product", GetProduct(m => m.status == "1" && m.genre_id == ProductGene.Phutung, page, sortOrder));
         }
-        public ActionResult PCWORKSTATION(int? page, string sortOrder)
+        public ActionResult dichvu_dep(int? page, string sortOrder)
         {
-            ViewBag.SortBy = "PCWORKSTATION";
-            ViewBag.Type = "PC Workstation" + "?";
-            ViewBag.CountProduct = db.Products.Where(m => m.genre_id == 36).Count();
-            return View("Product", GetProduct(m => m.status == "1" && m.genre_id == ProductGene.PCWORKSTATION, page, sortOrder));
-        }
-        public ActionResult PCGAMING(int? page, string sortOrder)
-        {
-            ViewBag.SortBy = "PCGAMING";
-            ViewBag.Type = "PC Gaming" + "?";
-            ViewBag.CountProduct = db.Products.Where(m => m.genre_id == 37).Count();
-            return View("Product", GetProduct(m => m.status == "1" && m.genre_id == ProductGene.PCGAMING, page, sortOrder));
+            ViewBag.SortBy = "các combo";
+            ViewBag.Type = "Các combo" + "?";
+            ViewBag.CountProduct = db.Products.Where(m => m.genre_id == 33).Count();
+            return View("Product", GetProduct(m => m.status == "1" && m.genre_id == ProductGene.lmdep, page, sortOrder));
         }
         //xem chi tiết sản phẩm
         public ActionResult ProductDetail(int id, int? page)

@@ -66,7 +66,7 @@
                                                 <td>@item.oder_date.ToString("HH:mm dd-MM-yyyy")</td>
                                                 <td>@(item.status == "1" ? "Chờ xử lý": item.status == "2"? "Đang xử lý" : item.status == "3" ? "Hoàn thành": "Bị hủy")</td>
                                                 <td>@item.Oder_Detail.Sum(m => m.quantity)</td>
-                                                <td>@item.total.ToString("#,0¥", culture.NumberFormat)</td>
+                                                <td>@item.total.ToString("#,0VND", culture.NumberFormat)</td>
                                                 <td><a href="@Url.Action("TrackingOrderDetail","Account",new {id=item.order_id})" class="view">Xem</a></td>
                                             </tr>
                                         }

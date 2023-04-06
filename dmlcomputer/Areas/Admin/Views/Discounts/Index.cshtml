@@ -111,7 +111,7 @@
                                     <th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:100px;">Mức giảm</th>
                                     <th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:120px;">Code giảm giá</th>
                                     <th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:120px;">Số lượng</th>
-                                    <th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:120px;">Ngày tạo</th>
+                                    <th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:120px;">Ngày băt đầu</th>
                                     <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" style="width: 130.25px;">Hành động</th>
                                 </tr>
                                 <!--end::Table row-->
@@ -119,46 +119,51 @@
                             <!--end::Table head-->
                             <!--begin::Table body-->
                             <tbody class="text-gray-600 fw-bold">
-                                @foreach (var item in Model)
+                                @if (Model != null && Model.Any())
                                 {
-                                <tr class="odd" id="item_@item.disscount_id">
-                                    <td>@item.disscount_id </td>
-                                    <td id="dis-name_@item.disscount_id">@item.discount_name</td>
-                                    <td style="color: #005ec4;" id="discount-price_@item.disscount_id">@item.discount_price.ToString("#,0¥", culture.NumberFormat)</td>
-                                    <td id="discount-code_@item.disscount_id">@item.discount_code</td>
-                                    <td class="@(item.quantity == 0 ? "text-danger":"text-success")" id="discount-quan_@item.disscount_id">@item.quantity</td>
-                                    <td>@item.create_at.ToString("HH:mm dd-MM-yyyy")</td>
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                            Hành động
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon-->
-                                        </a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a onclick="editOpen(@item.disscount_id, '@item.discount_price', '@item.discount_code', '@item.discount_star', '@item.discount_end',@item.quantity)" class="menu-link px-3">Chỉnh sửa</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a onclick="deleteOpen(@item.disscount_id,'@item.discount_name')" class="menu-link px-3">Xóa</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
+                                    var i = 1 + (@ViewBag.Page - 1) * 15;
+                                    foreach (var item in Model)
+                                    {
+                                        <tr class="odd" id="item_@item.disscount_id">
+                                            <td>@i </td>
+                                            <td id="dis-name_@item.disscount_id">@item.discount_name</td>
+                                            <td style="color: #005ec4;" id="discount-price_@item.disscount_id">@item.discount_price.ToString("#,0VND", culture.NumberFormat)</td>
+                                            <td id="discount-code_@item.disscount_id">@item.discount_code</td>
+                                            <td class="@(item.quantity == 0 ? "text-danger" : "text-success")" id="discount-quan_@item.disscount_id">@item.quantity</td>
+                                            <td>@item.update_at.ToString("HH:mm dd-MM-yyyy")</td>
+                                            <!--begin::Action=-->
+                                            <td class="text-end">
+                                                <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                                    Hành động
+                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                                    <span class="svg-icon svg-icon-5 m-0">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <!--end::Svg Icon-->
+                                                </a>
+                                                <!--begin::Menu-->
+                                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                    <!--begin::Menu item-->
+                                                    <div class="menu-item px-3">
+                                                        <a onclick="editOpen(@item.disscount_id, '@item.discount_price', '@item.discount_code', '@item.discount_star', '@item.discount_end',@item.quantity)" class="menu-link px-3">Chỉnh sửa</a>
+                                                    </div>
+                                                    <!--end::Menu item-->
+                                                    <!--begin::Menu item-->
+                                                    <div class="menu-item px-3">
+                                                        <a onclick="deleteOpen(@item.disscount_id,'@item.discount_name')" class="menu-link px-3">Xóa</a>
+                                                    </div>
+                                                    <!--end::Menu item-->
+                                                </div>
+                                                <!--end::Menu-->
+                                            </td>
+                                            <!--end::Action=-->
+                                        </tr>
+                                        i++;
+                                    }
                                 }
-                            </tbody>
+                                </tbody>
                             <!--end::Table body-->
                         </table>
                     </div>
