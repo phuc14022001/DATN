@@ -26,67 +26,73 @@
                         <div class="main-menu menu-color--black menu-hover-color--golden">
                             <nav>
                                 <ul>
+                                    @if (User.Identity.IsAuthenticated && User.Identity.GetRole() == 0)
+                                    {                                     
+                                            <li>
+                                                <a href="@Url.Action("DashBoards", "Admin")">Admin Panel</a>
+                                            </li><li><a href="@Url.Action("LogOut", "Account")">Đăng xuất</a></li>
+                                         
+                                    }
+                                    else
+                                    {
                                     <li>
-                                        <a class="active main-menu-link" href="@Url.Action("Index","Home")">Trang Chủ</a>
+                                        <a class="active main-menu-link" href="@Url.Action("Index", "Home")">Trang Chủ</a>
                                     </li>
                                     <li class="has-dropdown has-megaitem">
-                                        <a href="@Url.Action("Laptop","Products")">
+                                        <a href="@Url.Action("baoduong", "Products")">
                                             Bảo dưỡng
                                         </a>
                                         <ul class="sub-menu">
-                                            <li><a href="@Url.Action("LAPTOPVANPHONG","Products")">Laptop Văn Phòng</a></li>
-                                            <li><a href="@Url.Action("LAPTOPWORKSTATION","Products")">Laptop Workstation </a></li>
-                                            <li><a href="@Url.Action("LAPTOPGAMING","Products")">Laptop Gaming</a></li>
+                                            <li><a href="@Url.Action("gam", "Products")">Bảo dưỡng máy gầm</a></li>
+                                            <li><a href="@Url.Action("maylanh", "Products")">Bảo dưỡng điện lạnh </a></li>
+
 
                                         </ul>
                                     </li>
                                     <li class="has-dropdown has-megaitem">
-                                        <a href="@Url.Action("PC","Products")">Làm đẹp xe</a>
+                                        <a href="@Url.Action("lamdep", "Products")">Làm đẹp xe</a>
                                         <ul class="sub-menu">
-                                            
-                                            <li><a href="@Url.Action("PCGAMING","Products")">Laptop Workstation</a></li>
-                                            <li><a href="@Url.Action("PCWORKSTATION","Products")">Laptop Gaming</a></li>
+
+                                            <li><a href="@Url.Action("phukien", "Products")">Phụ tùng</a></li>
+                                            <li><a href="@Url.Action("dichvu_dep", "Products")">combo làm đẹp</a></li>
 
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="@Url.Action("Accessories","Products")">Bảo hiểm xe</a>
+                                        <a href="@Url.Action("Accessories", "Products")">Bảo hiểm xe</a>
                                     </li>
 
-                                    @if (User.Identity.IsAuthenticated)
+                                    if (User.Identity.IsAuthenticated)
                                     {
-                                        if (User.Identity.GetRole() != 1)
+                                        if (User.Identity.IsAuthenticated && User.Identity.GetRole() != 1)
                                         {
                                             <li>
-                                                <a href="@Url.Action("DashBoards","Admin")">Admin Panel</a>
+                                                <a href="@Url.Action("DashBoards", "Admin")">Admin Panel</a>
                                             </li>
                                         }
-                                        else
-                                        {
-                                            <li>
-                                                <a href="https://www.facebook.com/nhatbanpcgaming/?ref=page_internal">Liên Hệ</a>
-                                            </li>
-                                        }
+
                                         <li class="has-dropdown has-megaitem">
-                                            <a href="@Url.Action("EditProfile","Account")">@User.Identity.GetName()</a>
+                                            <a href="@Url.Action("EditProfile", "Account")">@User.Identity.GetName()</a>
                                             <ul class="sub-menu">
-                                                <li><a href="@Url.Action("TrackingOrder","Account")">Lịch sử mua hàng</a></li>
-                                                <li><a href="@Url.Action("Address","Account")">Sổ địa chỉ</a></li>
-                                                <li><a href="@Url.Action("ChangePassword","Account")">Đổi mật khẩu</a></li>
-                                                <li><a href="@Url.Action("LogOut","Account")">Đăng xuất</a></li>
+                                                <li><a href="@Url.Action("TrackingOrder", "Account")">Lịch sử mua hàng</a></li>
+                                                <li><a href="@Url.Action("Address", "Account")">Sổ địa chỉ</a></li>
+                                                <li><a href="@Url.Action("ChangePassword", "Account")">Đổi mật khẩu</a></li>
+                                                <li><a href="@Url.Action("LogOut", "Account")">Đăng xuất</a></li>
                                             </ul>
                                         </li>
                                     }
                                     else
                                     {
                                         <li class="has-dropdown has-megaitem">
-                                            <a href="@Url.Action("Login","Account")">Đăng nhập</a>
+                                            <a href="@Url.Action("Login", "Account")">Đăng nhập</a>
                                             <ul class="sub-menu">
-                                                <li><a href="@Url.Action("Register","Account")">Đăng ký</a></li>
-                                                <li><a href="@Url.Action("ForgotPassword","Account")">Quên mật khẩu</a></li>
+                                                <li><a href="@Url.Action("Register", "Account")">Đăng ký</a></li>
+                                                <li><a href="@Url.Action("ForgotPassword", "Account")">Quên mật khẩu</a></li>
                                             </ul>
                                         </li>
                                     }
+                                 }
+
                                 </ul>
                             </nav>
                         </div>
@@ -96,7 +102,7 @@
                             <li>
                                 <a href="#offcanvas-add-cart" class="offcanvas-toggle" id="goToCart">
                                     <i class="icon-bag"></i>
-                                    <span class="item-count lblCartCount" >0</span>
+                                    <span class="item-count lblCartCount">0</span>
                                 </a>
                             </li>
                             <li>

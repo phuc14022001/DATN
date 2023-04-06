@@ -32,7 +32,8 @@ namespace DoAn_LapTrinhWeb.Controllers
             {
                 return RedirectToAction("Login", new { returnUrl = Request.UrlReferrer.ToString() });
             }
-            if (User.Identity.IsAuthenticated)
+            
+            if (User.Identity.IsAuthenticated )
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -59,8 +60,11 @@ namespace DoAn_LapTrinhWeb.Controllers
                 FormsAuthentication.SetAuthCookie(JsonConvert.SerializeObject(userData), false);
                 if (!String.IsNullOrEmpty(returnUrl))
                     return Redirect(returnUrl);
-                else
+                else if (userData.RoleCode == 2)
+                {
                     return RedirectToAction("Index", "Home");
+                }
+                else { return RedirectToAction("Index", "DashBoards"); }
             }
             Notification.setNotification3s("Email, mật khẩu không đúng, hoặc tài khoản bị vô hiệu hóa", "error");
             return View(model);

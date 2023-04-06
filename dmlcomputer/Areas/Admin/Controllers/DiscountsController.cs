@@ -19,6 +19,7 @@ namespace DoAn_LapTrinhWeb.Areas.Admin.Controllers
         {
             var pageSize = (size ?? 15);
             var pageNumber = (page ?? 1);
+            ViewBag.Page = pageNumber;
             ViewBag.search = search;
             var list = from a in _db.Discounts
                 orderby a.create_at descending
@@ -41,11 +42,11 @@ namespace DoAn_LapTrinhWeb.Areas.Admin.Controllers
             try
             {
                 discount.discount_name = "Giảm " +
-                        discountPrice.ToString("#,0¥", cul.NumberFormat) + " Từ " +
+                        discountPrice.ToString("#,0VND") + " Từ " +
                         discountStart.ToString("dd-MM-yyyy") + " => " +
                         discountEnd.ToString("dd-MM-yyyy");
                 discount.discount_price = discountPrice;
-                discount.quantity = quantity;
+                discount.quantity = quantity; 
                 discount.discount_star = discountStart;
                 discount.discount_end = discountEnd;
                 discount.discount_code = discountCode;
@@ -72,7 +73,7 @@ namespace DoAn_LapTrinhWeb.Areas.Admin.Controllers
             try
             {
                 discount.discount_name = "Giảm " +
-                discountPrice.ToString("#,0¥", cul.NumberFormat) + " Từ " +
+                discountPrice.ToString("#,0VND", cul.NumberFormat) + " Từ " +
                 discountStart.ToString("dd-MM-yyyy") + " => " +
                 discountEnd.ToString("dd-MM-yyyy");
                 discount.discount_price = discountPrice;

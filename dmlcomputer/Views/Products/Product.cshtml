@@ -1,5 +1,6 @@
 ﻿@using PagedList
 @model IPagedList<DoAn_LapTrinhWeb.Models.Product>
+
 @{
     ViewBag.Title = ViewBag.Type;
     Layout = "~/Views/Shared/Main_Layout.cshtml";
@@ -9,6 +10,7 @@
 }
 @*<link href="~/Content/UserCSS/PagedList.css" rel="stylesheet" />*@
 <!-- ...:::: Start Breadcrumb Section:::... -->
+
 <div class="breadcrumb-section breadcrumb-bg-color--black">
     <div class="breadcrumb-wrapper">
         <div class="container">
@@ -17,9 +19,9 @@
                     <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
                         <nav aria-label="breadcrumb">
                             <ul>
-                                <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+                                <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
                                 <li>
-                                    <a href="#">Sản phẩm</a>
+                                    <a href="#">Dịch Vụ</a>
                                 </li>
                                 <li class="active" aria-current="page">
                                     @ViewBag.Type
@@ -45,26 +47,26 @@
                         <h6 class="sidebar-title">DANH MỤC</h6>
                         <div class="sidebar-content">
                             <ul class="sidebar-menu">
-                                <li><a href="@Url.Action("Laptop","Products")">Bảo dưỡng</a></li>
-                                <li><a href="@Url.Action("pc","Products")">Làm đẹp xe</a></li>
-                                <li><a href="@Url.Action("Accessories","Products")">Bảo hiểm xe</a></li>
+                                <li><a href="@Url.Action("baoduong", "Products")">Bảo dưỡng</a></li>
+                                <li><a href="@Url.Action("lamdep", "Products")">Làm đẹp xe</a></li>
+                                <li><a href="@Url.Action("Accessories", "Products")">Bảo hiểm xe</a></li>
 
                             </ul>
                         </div>
                     </div> <!-- End Single Sidebar Widget -->
                     <!-- Start Single Sidebar Widget -->
                     @*<div class="sidebar-single-widget">
-                        <h6 class="sidebar-title">Tìm Theo Giá</h6>
-                        <div class="sidebar-content">
-                            <div id="slider-range"></div>
-                            <div class="filter-type-price">
-                                <label for="amount">Khoảng giá:</label>
-                                <input type="text" id="amount">
+                            <h6 class="sidebar-title">Tìm Theo Giá</h6>
+                            <div class="sidebar-content">
+                                <div id="slider-range"></div>
+                                <div class="filter-type-price">
+                                    <label for="amount">Khoảng giá:</label>
+                                    <input type="text" id="amount">
+                                </div>
                             </div>
-                        </div>
-                    </div>*@ <!-- End Single Sidebar Widget -->
+                        </div>*@ <!-- End Single Sidebar Widget -->
                     <!-- Start Single Sidebar Widget -->
-                     <!-- End Single Sidebar Widget -->
+                    <!-- End Single Sidebar Widget -->
                     <!-- Start Single Sidebar Widget -->
                     <div class="sidebar-single-widget">
 
@@ -98,7 +100,7 @@
 
                                     <!-- Start Page Amount -->
                                     <div class="page-amount ml-2">
-                                        <span>Hiển thị @(ViewBag.Showing == 0?"0": "1 - "+ViewBag.Showing) trong @ViewBag.CountProduct kết quả tìm thấy</span>
+                                        <span>Hiển thị @(ViewBag.Showing == 0 ? "0" : "1 - " + ViewBag.Showing) trong @ViewBag.CountProduct kết quả tìm thấy</span>
                                     </div> <!-- End Page Amount -->
                                 </div> <!-- End Sort tab Button -->
                                 <!-- Start Sort Select Option -->
@@ -167,10 +169,10 @@
                                                                            data-bs-target="#modalQuickview">
                                                                             <i class="icon-magnifier"></i>
                                                                         </a>
-                                                                        <a >
+                                                                        <a>
                                                                             <i class="icon-heart"></i>
                                                                         </a>
-                                                                        <a >
+                                                                        <a>
                                                                             <i class="icon-shuffle"></i>
                                                                         </a>
                                                                     </div>
@@ -287,8 +289,8 @@
                                                         </div>
                                                         <!-- End Product Default Single Item -->
                                                     </div>
-                                                }
-                                            }
+                                                                            }
+                                                                        }
                                         </div>
                                     </div> <!-- End Grid View Product -->
                                     <!-- Start List View Product -->
@@ -426,7 +428,7 @@
                                                         </div>
                                                     </div> <!-- End Product Defautlt Single -->
                                                 </div>
-                                            }
+                                                                    }
                                         </div>
                                     </div> <!-- End List View Product -->
                                 </div>
@@ -445,11 +447,11 @@
 </div> <!-- ...:::: End Shop Section:::... -->
 @section scripts{
     <script>
-            $("select.search").change(function () {
-                let getSortBy = $('#sort-for').text();
-                const selected = $(this).children("option:selected").val();
-                window.location.href = getSortBy+'sortOrder=' + selected;
-            });
-        </script>
+        $("select.search").change(function () {
+            let getSortBy = $('#sort-for').text();
+            const selected = $(this).children("option:selected").val();
+            window.location.href = getSortBy + 'sortOrder=' + selected;
+        });
+    </script>
     <script src="~/Scripts/UserJS/add-to-cart.js"></script>
 }
