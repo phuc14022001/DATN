@@ -14,7 +14,7 @@
     var discountPrice = Convert.ToDouble(ViewBag.Discount);
     var total = Convert.ToDouble(ViewBag.Total);    // Giá sau khi áp dụng mã giảm giá, được tính ở controller
     var price = total + discountPrice;  // giá gốc trước khi giảm
-    var shippingFee = 0d;           // Phí vận chuyển 30k
+    var shippingFee = 0d;           
     total += shippingFee;
     TempData["Total"] = total;
 }
@@ -192,11 +192,7 @@
                                             <td>@price.ToString("#,0VND", culture.NumberFormat)</td>
                                         </tr>
                                         <tr>
-                                            <th>Giảm giá</th>
-                                            <td>@discountPrice.ToString("#,0VND", culture.NumberFormat)</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Phí vận chuyển</th>
+                                            <th>VAT</th>
                                             <td>@shippingFee.ToString("#,0VND", culture.NumberFormat)</td>
                                         </tr>
                                         <tr class="order_total">

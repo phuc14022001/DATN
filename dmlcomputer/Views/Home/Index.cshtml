@@ -4,9 +4,9 @@
     var culture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
     var listHostProduct = (List<DoAn_LapTrinhWeb.Models.Product>)ViewBag.HotProduct;
     var listNewProduct = (List<DoAn_LapTrinhWeb.Models.Product>)ViewBag.NewProduct;
-    var listLaptop = (List<DoAn_LapTrinhWeb.Models.Product>)ViewBag.Laptop;
-    var listPC = (List<DoAn_LapTrinhWeb.Models.Product>)ViewBag.PC;
-    var listAccessory = (List<DoAn_LapTrinhWeb.Models.Product>)ViewBag.Accessory;
+    var listLaptop = (List<DoAn_LapTrinhWeb.Models.Product>)ViewBag.Baoduong;
+    var listAccessory = (List<DoAn_LapTrinhWeb.Models.Product>)ViewBag.lamdep;
+    var listPC = (List<DoAn_LapTrinhWeb.Models.Product>)ViewBag.Accessory;
     var listOrderDetail = (List<DoAn_LapTrinhWeb.Model.Oder_Detail>)ViewBag.OrderDetail;
     var AvgFeedback = (List<DoAn_LapTrinhWeb.Model.Feedback>)ViewBag.AvgFeedback;
 }
@@ -20,17 +20,20 @@
             <!-- Start Hero Single Slider Item -->
             <div class="hero-single-slider-item swiper-slide">
                 <!-- Hero Slider Image -->
-                <div class="hero-slider-bg">
-                    <img src="~/Content/Image_dich_vu/anh_bia.jpg" />
+                <div class="d-flex justify-content-center">
+                    <img src="~/Content/Image_dich_vu/anh_bia1.jpg" />
                 </div>
             </div>
 
         </div>
         <a></a>
     </div>
-
-    <!-- End Hero Slider Section-->
-    <!--begin::New Product-->
+    @if (User.Identity.IsAuthenticated && User.Identity.GetRole() == 0)
+    { }
+    else
+    {
+        <!-- End Hero Slider Section-->
+        <!--begin::New Product-->
         <div class="product-default-slider-section section-top-gap-100 section-fluid">
             <!-- Start Section Content Text Area -->
             <div class="section-title-wrapper" data-aos="fade-up" data-aos-delay="0">
@@ -39,7 +42,7 @@
                         <div class="col-12">
                             <div class="section-content-gap">
                                 <div class="secton-content">
-                                    <h3 class="section-title">Sản phẩm mới</h3>
+                                    <h3 class="section-title">Dịch vụ mới</h3>
                                     <p>
                                         Đặt hàng trước ngay bây giờ để nhận ưu đãi & quà tặng độc
                                         quyền
@@ -68,7 +71,7 @@
                                                     <a href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.product_name)-@item.product_id"
                                                        class="image-link">
                                                         <img src="@item.image"
-                                                             alt="@item.product_name" />
+                                                             alt="@item.product_name" style="width : 328.67px ; height :350px"/>
                                                     </a>
                                                     @if (item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.discount_price != 0)
                                                     {
@@ -81,7 +84,7 @@
                                                             <input step="1" id="quantity" autocomplete="off" hidden value="1" type="number" />
                                                             <a class="btnAddToCart" style="cursor:pointer;" data-id="@item.product_id">Thêm vào giỏ</a>
                                                         </div>
-                                                        <div class="action-link-right">
+                                                        @*<div class="action-link-right">
                                                             <a href="#"
                                                                data-bs-toggle="modal"
                                                                data-bs-target="#modalQuickview">
@@ -93,7 +96,7 @@
                                                             <a>
                                                                 <i class="icon-shuffle"></i>
                                                             </a>
-                                                        </div>
+                                                        </div>*@
                                                     </div>
                                                 </div>
                                                 <div class="content">
@@ -103,7 +106,7 @@
                                                         </h6>
                                                     </div>
                                                 </div>
-                                                <div class="text-center">
+                                                @*<div class="text-center">
                                                     <ul class="review-star">
                                                         @{
                                                             double onestar = 1; int c_onestar = 0; double truestar = 2; int c_truestar = 0;
@@ -193,15 +196,15 @@
                                                         }
                                                         @Html.Raw(avgStar)
                                                     </ul>
-                                                </div>
+                                                </div>*@
                                                 <div class="text-center">
                                                     @if (item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.discount_price != 0)
                                                     {
-                                                        <span class="price"><del style="font-size:15px; margin-right:7px;">@item.price.ToString("#,0¥", culture.NumberFormat)</del><span style="color: #000; font-size: 17px; font-weight: 600;">@((item.price - item.Discount.discount_price).ToString("#,0¥", culture.NumberFormat))</span></span>
+                                                        <span class="price"><del style="font-size:15px; margin-right:7px;">@item.price.ToString("#,0VND", culture.NumberFormat)</del><span style="color: #000; font-size: 17px; font-weight: 600;">@((item.price - item.Discount.discount_price).ToString("#,0VND", culture.NumberFormat))</span></span>
                                                     }
                                                     else
                                                     {
-                                                        <span class="price" style="font-size: 17px; color: #000; font-weight: 600;">@item.price.ToString("#,0¥", culture.NumberFormat)</span>
+                                                        <span class="price" style="font-size: 17px; color: #000; font-weight: 600;">@item.price.ToString("#,0VND", culture.NumberFormat)</span>
                                                     }
                                                 </div>
                                             </div>
@@ -228,9 +231,9 @@
                         <div class="col-12">
                             <div class="section-content-gap">
                                 <div class="secton-content">
-                                    <h3 class="section-title">SẢN PHẨM BÁN CHẠY NHẤT</h3>
+                                    <h3 class="section-title">Dịch vụ BÁN CHẠY NHẤT</h3>
                                     <p>
-                                        Nhanh chóng cho những sản phẩm tốt nhất của chúng tôi vào
+                                        Nhanh chóng cho những Dịch vụ tốt nhất của chúng tôi vào
                                         giỏ hàng của bạn nào.
                                     </p>
                                 </div>
@@ -257,7 +260,7 @@
                                                     <a href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.product_name)-@item.product_id"
                                                        class="image-link">
                                                         <img src="@item.image"
-                                                             alt="@item.product_name" />
+                                                             alt="@item.product_name" style="width : 328.67px ; height :350px" />
                                                     </a>
                                                     @if (item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.discount_price != 0)
                                                     {
@@ -270,7 +273,7 @@
                                                             <input step="1" id="quantity" autocomplete="off" hidden value="1" type="number" />
                                                             <a class="btnAddToCart" style="cursor:pointer;" data-id="@item.product_id">Thêm vào giỏ</a>
                                                         </div>
-                                                        <div class="action-link-right">
+                                                        @*<div class="action-link-right">
                                                             <a href="#"
                                                                data-bs-toggle="modal"
                                                                data-bs-target="#modalQuickview">
@@ -282,7 +285,7 @@
                                                             <a>
                                                                 <i class="icon-shuffle"></i>
                                                             </a>
-                                                        </div>
+                                                        </div>*@
                                                     </div>
                                                 </div>
                                                 <div class="content">
@@ -293,7 +296,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="text-center">
-                                                    <ul class="review-star">
+                                                    @*<ul class="review-star">
                                                         @{
                                                             double onestar = 1; int c_onestar = 0; double truestar = 2; int c_truestar = 0;
                                                             double threestar = 3; int c_threestar = 0; ; double fourstar = 4; int c_fourstar = 0;
@@ -381,16 +384,16 @@
                                                             }
                                                         }
                                                         @Html.Raw(avgStar)
-                                                    </ul>
+                                                    </ul>*@
                                                 </div>
                                                 <div class="text-center">
                                                     @if (item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.discount_price != 0)
                                                     {
-                                                        <span class="price"><del style="font-size:15px; margin-right:7px;">@item.price.ToString("#,0¥", culture.NumberFormat)</del><span style="color: #000; font-size: 17px; font-weight: 600;">@((item.price - item.Discount.discount_price).ToString("#,0¥", culture.NumberFormat))</span></span>
+                                                        <span class="price"><del style="font-size:15px; margin-right:7px;">@item.price.ToString("#,0VND", culture.NumberFormat)</del><span style="color: #000; font-size: 17px; font-weight: 600;">@((item.price - item.Discount.discount_price).ToString("#,0VND", culture.NumberFormat))</span></span>
                                                     }
                                                     else
                                                     {
-                                                        <span class="price" style="font-size: 17px; color: #000; font-weight: 600;">@item.price.ToString("#,0¥", culture.NumberFormat)</span>
+                                                        <span class="price" style="font-size: 17px; color: #000; font-weight: 600;">@item.price.ToString("#,0VND", culture.NumberFormat)</span>
                                                     }
                                                 </div>
                                             </div>
@@ -442,7 +445,7 @@
                                                     <a href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.product_name)-@item.product_id"
                                                        class="image-link">
                                                         <img src="@item.image"
-                                                             alt="@item.product_name" />
+                                                             alt="@item.product_name" style="width : 328.67px ; height :350px" />
                                                     </a>
                                                     @if (item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.discount_price != 0)
                                                     {
@@ -455,7 +458,7 @@
                                                             <input step="1" id="quantity" autocomplete="off" hidden value="1" type="number" />
                                                             <a class="btnAddToCart" style="cursor:pointer;" data-id="@item.product_id">Thêm vào giỏ</a>
                                                         </div>
-                                                        <div class="action-link-right">
+                                                        @*<div class="action-link-right">
                                                             <a href="#"
                                                                data-bs-toggle="modal"
                                                                data-bs-target="#modalQuickview">
@@ -467,7 +470,7 @@
                                                             <a>
                                                                 <i class="icon-shuffle"></i>
                                                             </a>
-                                                        </div>
+                                                        </div>*@
                                                     </div>
                                                 </div>
                                                 <div class="content">
@@ -478,7 +481,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="text-center">
-                                                    <ul class="review-star">
+                                                    @*<ul class="review-star">
                                                         @{
                                                             double onestar = 1; int c_onestar = 0; double truestar = 2; int c_truestar = 0;
                                                             double threestar = 3; int c_threestar = 0; ; double fourstar = 4; int c_fourstar = 0;
@@ -566,16 +569,16 @@
                                                             }
                                                         }
                                                         @Html.Raw(avgStar)
-                                                    </ul>
+                                                    </ul>*@
                                                 </div>
                                                 <div class="text-center">
                                                     @if (item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.discount_price != 0)
                                                     {
-                                                        <span class="price"><del style="font-size:15px; margin-right:7px;">@item.price.ToString("#,0¥", culture.NumberFormat)</del><span style="color: #000; font-size: 17px; font-weight: 600;">@((item.price - item.Discount.discount_price).ToString("#,0¥", culture.NumberFormat))</span></span>
+                                                        <span class="price"><del style="font-size:15px; margin-right:7px;">@item.price.ToString("#,0VND", culture.NumberFormat)</del><span style="color: #000; font-size: 17px; font-weight: 600;">@((item.price - item.Discount.discount_price).ToString("#,0VND", culture.NumberFormat))</span></span>
                                                     }
                                                     else
                                                     {
-                                                        <span class="price" style="font-size: 17px; color: #000; font-weight: 600;">@item.price.ToString("#,0¥", culture.NumberFormat)</span>
+                                                        <span class="price" style="font-size: 17px; color: #000; font-weight: 600;">@item.price.ToString("#,0VND", culture.NumberFormat)</span>
                                                     }
                                                 </div>
                                             </div>
@@ -626,7 +629,7 @@
                                                 <a href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.product_name)-@item.product_id"
                                                    class="image-link">
                                                     <img src="@item.image"
-                                                         alt="@item.product_name" />
+                                                         alt="@item.product_name" style="width : 328.67px ; height :350px" />
                                                 </a>
                                                 @if (item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.discount_price != 0)
                                                 {
@@ -639,7 +642,7 @@
                                                         <input step="1" id="quantity" autocomplete="off" hidden value="1" type="number" />
                                                         <a class="btnAddToCart" style="cursor:pointer;" data-id="@item.product_id">Thêm vào giỏ</a>
                                                     </div>
-                                                    <div class="action-link-right">
+                                                    @*<div class="action-link-right">
                                                         <a href="#"
                                                            data-bs-toggle="modal"
                                                            data-bs-target="#modalQuickview">
@@ -651,7 +654,7 @@
                                                         <a>
                                                             <i class="icon-shuffle"></i>
                                                         </a>
-                                                    </div>
+                                                    </div>*@
                                                 </div>
                                             </div>
                                             <div class="content">
@@ -662,7 +665,7 @@
                                                 </div>
                                             </div>
                                             <div class="text-center">
-                                                <ul class="review-star">
+                                                @*<ul class="review-star">
                                                     @{
                                                         double onestar = 1; int c_onestar = 0; double truestar = 2; int c_truestar = 0;
                                                         double threestar = 3; int c_threestar = 0; ; double fourstar = 4; int c_fourstar = 0;
@@ -750,16 +753,16 @@
                                                         }
                                                     }
                                                     @Html.Raw(avgStar)
-                                                </ul>
+                                                </ul>*@
                                             </div>
                                             <div class="text-center">
                                                 @if (item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.discount_price != 0)
                                                 {
-                                                    <span class="price"><del style="font-size:15px; margin-right:7px;">@item.price.ToString("#,0¥", culture.NumberFormat)</del><span style="color: #000; font-size: 17px; font-weight: 600;">@((item.price - item.Discount.discount_price).ToString("#,0¥", culture.NumberFormat))</span></span>
+                                                    <span class="price"><del style="font-size:15px; margin-right:7px;">@item.price.ToString("#,0VND", culture.NumberFormat)</del><span style="color: #000; font-size: 17px; font-weight: 600;">@((item.price - item.Discount.discount_price).ToString("#,0VND", culture.NumberFormat))</span></span>
                                                 }
                                                 else
                                                 {
-                                                    <span class="price" style="font-size: 17px; color: #000; font-weight: 600;">@item.price.ToString("#,0¥", culture.NumberFormat)</span>
+                                                    <span class="price" style="font-size: 17px; color: #000; font-weight: 600;">@item.price.ToString("#,0VND", culture.NumberFormat)</span>
                                                 }
                                             </div>
                                         </div>
@@ -810,7 +813,7 @@
                                                     <a href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.product_name)-@item.product_id"
                                                        class="image-link">
                                                         <img src="@item.image"
-                                                             alt="@item.product_name" />
+                                                             alt="@item.product_name" style="width : 328.67px ; height :350px" />
                                                     </a>
                                                     @if (item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.discount_price != 0)
                                                     {
@@ -939,11 +942,11 @@
                                                 <div class="text-center">
                                                     @if (item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.discount_price != 0)
                                                     {
-                                                        <span class="price"><del style="font-size:15px; margin-right:7px;">@item.price.ToString("#,0¥", culture.NumberFormat)</del><span style="color: #000; font-size: 17px; font-weight: 600;">@((item.price - item.Discount.discount_price).ToString("#,0¥", culture.NumberFormat))</span></span>
+                                                        <span class="price"><del style="font-size:15px; margin-right:7px;">@item.price.ToString("#,0VND", culture.NumberFormat)</del><span style="color: #000; font-size: 17px; font-weight: 600;">@((item.price - item.Discount.discount_price).ToString("#,0VND", culture.NumberFormat))</span></span>
                                                     }
                                                     else
                                                     {
-                                                        <span class="price" style="font-size: 17px; color: #000; font-weight: 600;">@item.price.ToString("#,0¥", culture.NumberFormat)</span>
+                                                        <span class="price" style="font-size: 17px; color: #000; font-weight: 600;">@item.price.ToString("#,0VND", culture.NumberFormat)</span>
                                                     }
                                                 </div>
                                             </div>
@@ -960,6 +963,7 @@
                 </div>
             </div>
         </div>
+                                                            }
         <!--end::Accessory->
         <!-- Start Service Section -->
         <div class="service-promo-section section-top-gap-100">
@@ -1042,9 +1046,9 @@
                 </div>
             </div>
         </div>
-    
-<!-- End Service Section -->
-<!-- End Product Default Slider Section -->
-@section scripts{
-    <script src="~/Scripts/UserJS/add-to-cart.js"></script>
-}
+
+        <!-- End Service Section -->
+        <!-- End Product Default Slider Section -->
+        @section scripts{
+            <script src="~/Scripts/UserJS/add-to-cart.js"></script>
+        }
