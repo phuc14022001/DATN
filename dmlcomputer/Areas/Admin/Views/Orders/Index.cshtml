@@ -122,8 +122,8 @@
                                         <td>
                                             <div class="d-flex gap-2">
                                                 <a class="btn @(item.status == "1"? "btn-warning" :"btn-light-warning")" id="waiting_btn_@item.order_id">Chờ xử lý</a>
-                                                <input type="date" name="@item.oder_date" id="@item.oder_date" />
-                                                <a @(item.status == "3" ? "" : "btn-light-success") onclick="CompletedOpen(@item.order_id) " id="comlpleted_btn_@item.order_id" class="btn @(item.status == "3"? "btn-success" :"btn-light-success")">Hẹn ngày</a>
+
+                                                <a @(item.status == "3" ? "" : "btn-light-success") onclick="CompletedOpen(@item.order_id) " id="comlpleted_btn_@item.order_id" class="btn @(item.status == "3"? "btn-success" :"btn-light-success")">Hẹn luôn bây giờ </a>
                                                 
                                                 
                                             </div>

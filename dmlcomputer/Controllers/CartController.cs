@@ -173,7 +173,7 @@ namespace DoAn_LapTrinhWeb.Controllers
                     listProduct.Add(product);
                     priceSum+= (_price * cart.Item2[i]);
                     orderItem += "<tr style='margin'> <td align='left' width='75%' style=' padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;' >" +
-                                product.product_name+"</td><td align='left' width='25%' style=' padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; ' >"+product.price.ToString("#,0¥", culture.NumberFormat) + "</td> </tr>";
+                                product.product_name+"</td><td align='left' width='25%' style=' padding: 6px 12px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; ' >"+product.price.ToString("#,0VND", culture.NumberFormat) + "</td> </tr>";
                 }
                 //thêm dữ liệu vào table
                 if (productquancheck.Trim() != "0")
@@ -193,10 +193,11 @@ namespace DoAn_LapTrinhWeb.Controllers
                 Session.Remove("Discountcode");
                 emailID = User.Identity.GetEmail();
                 orderID = order.order_id.ToString();
-                orderDiscount = (priceSum + 30000 - order.total).ToString("#,0¥", culture.NumberFormat);
-                orderPrice = priceSum.ToString("#,0¥", culture.NumberFormat);
-                orderTotal = order.total.ToString("#,0¥", culture.NumberFormat);
-                //SendVerificationLinkEmail(emailID, orderID, orderItem, orderDiscount, orderPrice, orderTotal, contentWard, district, province); //nếu muốn gửi email đơn hàng thì bật lên
+                orderDiscount = (priceSum - order.total).ToString("#,0VND", culture.NumberFormat);
+                
+                orderPrice = priceSum.ToString("#,0VND", culture.NumberFormat);
+                orderTotal = order.total.ToString("#,0VND", culture.NumberFormat);
+                SendVerificationLinkEmail(emailID, orderID, orderItem, orderDiscount, orderPrice, orderTotal, contentWard, district, province); //nếu muốn gửi email đơn hàng thì bật lên
                 Notification.setNotification3s("Đặt hàng thành công", "success");
                 return RedirectToAction("TrackingOrder", "Account");
             }
@@ -226,7 +227,7 @@ namespace DoAn_LapTrinhWeb.Controllers
             body = body.Replace("{{province}}", province);
             var smtp = new SmtpClient
             {
-                Host = EmailConfig.emailHost, //tên mấy chủ nếu bạn dùng gmail thì đổi  "Host = "smtp.gmail.com"
+                Host ="smtp.gmail.com" , //tên mấy chủ nếu bạn dùng gmail thì đổi  "Host = 
                 Port = 587,
                 EnableSsl = true, //bật ssl
                 DeliveryMethod = SmtpDeliveryMethod.Network,

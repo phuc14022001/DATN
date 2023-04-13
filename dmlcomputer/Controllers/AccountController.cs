@@ -207,7 +207,7 @@ namespace DoAn_LapTrinhWeb.Controllers
             body = body.Replace("{{viewBag.Confirmlink}}", Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl));//hiển thị nội dung lên form html
             var smtp = new SmtpClient
             {
-                Host = EmailConfig.emailHost, 
+                Host = "smtp.gmail.com", 
                 Port = 587,
                 EnableSsl = true, //bật ssl
                 DeliveryMethod = SmtpDeliveryMethod.Network,

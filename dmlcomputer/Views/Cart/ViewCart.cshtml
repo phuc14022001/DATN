@@ -7,7 +7,7 @@
     var culture = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
     List<int> quans = ViewBag.Quans as List<int>;
     double totalPrice = 0d;
-    double shippingFee = 0d;    // Phí vận chuyển 30k
+    double shippingFee = 0d;    
 }
 <!-- ...:::: Start Breadcrumb Section:::... -->
 <div class="breadcrumb-section breadcrumb-bg-color--black">
@@ -160,12 +160,8 @@
                                 <p>Tạm tính</p>
                                 <p style="font-size:16px;" class="cart_amount totalPrice">@totalPrice.ToString("#,0VND", culture.NumberFormat)</p>
                             </div>
-                            <div class="cart_subtotal">
-                                <p>Giảm giá</p>
-                                <p style="font-size:16px;" class="cart_amount" id="discount">0₫</p>
-                            </div>
                             <div class="cart_subtotal ">
-                                <p>Phí vận chuyển</p>
+                                <p>VAT</p>
                                 <p style="font-size:16px;" class="cart_amount">@shippingFee.ToString("#,0VND", culture.NumberFormat)</p>
                             </div>
                             <hr />
