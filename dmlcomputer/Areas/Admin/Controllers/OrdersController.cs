@@ -2,7 +2,9 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web.Mvc;
+using DoAn_LapTrinhWeb.Common;
 using DoAn_LapTrinhWeb.Common.Helpers;
 using DoAn_LapTrinhWeb.DTOs;
 using DoAn_LapTrinhWeb.Model;
@@ -121,6 +123,32 @@ namespace DoAn_LapTrinhWeb.Areas.Admin.Controllers
             {
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
+        }
+        // gửi mail khi hẹn ngày giờ
+        public void sendmail(string emailID)
+        {
+            var fromEmail = new MailAddress(EmailConfig.emailID, EmailConfig.emailName); // "username email-vd: vn123@gmail.com" ,"tên hiển thị mail khi gửi"
+
+            var toEmail = new MailAddress(emailID);
+            var fromEmailPassword = EmailConfig.emailPassword;
+            string Subject = "Cảm ơn quý khách";
+            string Body = "Bạn có thể đến với của hàng chúng tôi bây giờ để có thể thực hiện dịch vụ .";
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com", //tên mấy chủ nếu bạn dùng gmail thì đổi  "Host = 
+                Port = 587,
+                EnableSsl = true, //bật ssl
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = Subject,
+                Body = Body,
+                IsBodyHtml = true
+            })
+                smtp.Send(message);
         }
     }
 }

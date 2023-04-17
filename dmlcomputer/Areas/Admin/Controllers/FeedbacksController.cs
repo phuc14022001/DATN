@@ -18,6 +18,7 @@ namespace DoAn_LapTrinhWeb.Areas.Admin.Controllers
         {
             var pageSize = (size ?? 15);
             var pageNumber = (page ?? 1);
+            ViewBag.Page = pageNumber;
             ViewBag.search = search;
             var list = from a in db.Feedbacks
                 orderby a.create_at descending
