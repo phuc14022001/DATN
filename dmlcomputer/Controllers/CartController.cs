@@ -220,11 +220,12 @@ namespace DoAn_LapTrinhWeb.Controllers
             body = body.Replace("{{order_id}}", orderID);
             body = body.Replace("{{order_item}}", orderItem);
             body = body.Replace("{{order_discount}}", orderDiscount);
-            body = body.Replace("{{order_price}}", orderPrice);
+            body = body.Replace("{{order_price}}",orderPrice);
             body = body.Replace("{{total}}", orderTotal);
             body = body.Replace("{{contet_ward}}", contentWard);
             body = body.Replace("{{district}}", district);
             body = body.Replace("{{province}}", province);
+            
             var smtp = new SmtpClient
             {
                 Host ="smtp.gmail.com" , //tên mấy chủ nếu bạn dùng gmail thì đổi  "Host = 
