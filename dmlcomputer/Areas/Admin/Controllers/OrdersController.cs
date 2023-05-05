@@ -77,10 +77,12 @@ namespace DoAn_LapTrinhWeb.Areas.Admin.Controllers
             {
                 if (order.status != "3")
                 {
+                    
                     result = "success";
                     order.status = status;
                     order.update_at = DateTime.Now;
                     order.update_by = User.Identity.GetEmail();
+                    sendmail(User.Identity.GetEmail());
                     db.Entry(order).State = EntityState.Modified;
                     db.SaveChanges();
                     return Json(result, JsonRequestBehavior.AllowGet);
