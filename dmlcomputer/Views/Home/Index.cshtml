@@ -849,7 +849,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="text-center">
-                                                    <ul class="review-star">
+                                                    @*<ul class="review-star">
                                                         @{
                                                             double onestar = 1; int c_onestar = 0; double truestar = 2; int c_truestar = 0;
                                                             double threestar = 3; int c_threestar = 0; ; double fourstar = 4; int c_fourstar = 0;
@@ -937,7 +937,7 @@
                                                             }
                                                         }
                                                         @Html.Raw(avgStar)
-                                                    </ul>
+                                                    </ul>*@
                                                 </div>
                                                 <div class="text-center">
                                                     @if (item.Discount.discount_star < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.discount_price != 0)
